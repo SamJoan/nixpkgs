@@ -305,7 +305,7 @@ buildBazelPackage rec {
     # and appear unused and unimplemented for the undefined cases reported by the linker.
     # "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
 
-    # "--define=wasm=${wasmRuntime}"
+    "--define=wasm=${wasmRuntime}"
 
     "--define=boringssl=fips"
   ]
