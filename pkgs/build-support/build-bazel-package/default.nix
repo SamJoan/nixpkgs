@@ -289,6 +289,18 @@ stdenv.mkDerivation (
         # wrappers picking them up, pass them in explicitly via `--copt`, `--linkopt`
         # and related flags.
 
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+        echo "I AM HERE"
+
+        set -x
+
         copts=()
         host_copts=()
         linkopts=()
