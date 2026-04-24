@@ -63,6 +63,8 @@ buildBazelPackage rec {
   inherit (srcVer) version;
   bazel = bazel_7;
 
+  fetchConfigured = false;
+
   src = applyPatches {
     src = fetchFromGitHub {
       owner = "envoyproxy";
