@@ -301,8 +301,6 @@ stdenv.mkDerivation (
 
         set -x
 
-        bash
-
         copts=()
         host_copts=()
         linkopts=()

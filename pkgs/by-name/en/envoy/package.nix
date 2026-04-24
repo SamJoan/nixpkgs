@@ -303,9 +303,9 @@ buildBazelPackage rec {
     # The missing symbols would be instantiations of a template class from https://github.com/grpc/grpc/blob/v1.59.4/src/core/lib/transport/metadata_batch.h
     # "ParseMemento" and "MementoToValue" are only implemented for some types
     # and appear unused and unimplemented for the undefined cases reported by the linker.
-    "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
+    # "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
 
-    "--define=wasm=${wasmRuntime}"
+    # "--define=wasm=${wasmRuntime}"
 
     "--define=boringssl=fips"
   ]
