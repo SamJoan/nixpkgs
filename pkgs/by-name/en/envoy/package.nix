@@ -306,6 +306,8 @@ buildBazelPackage rec {
     "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
 
     "--define=wasm=${wasmRuntime}"
+
+    "--define=boringssl=fips"
   ]
   ++ (lib.optionals stdenv.hostPlatform.isAarch64 [
     # external/com_github_google_tcmalloc/tcmalloc/internal/percpu_tcmalloc.h:611:9: error: expected ':' or '::' before '[' token
