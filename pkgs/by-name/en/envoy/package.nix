@@ -333,6 +333,8 @@ buildBazelPackage rec {
     # https://github.com/bazelbuild/rules_go/issues/3844
     "--repo_env=GOPROXY=https://proxy.golang.org,direct"
     "--repo_env=GOSUMDB=sum.golang.org"
+
+    "--define=boringssl=fips"
   ];
 
   requiredSystemFeatures = [ "big-parallel" ];
