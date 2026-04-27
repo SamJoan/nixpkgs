@@ -64,7 +64,7 @@ buildBazelPackage rec {
   bazel = bazel_7;
 
   # TODO: is this helping
-  fetchConfigured = true;
+  fetchConfigured = false;
 
   src = applyPatches {
     src = fetchFromGitHub {
@@ -281,6 +281,8 @@ buildBazelPackage rec {
   bazelTargets = [ "//source/exe:envoy-static" ];
   bazelFlags = [
     "--repo_env=BAZEL_HTTP_RULES_URLS_AS_DEFAULT_CANONICAL_ID=0"
+
+    "--define=boringssl=fips"
   ];
   bazelBuildFlags = [
     "-c opt"
