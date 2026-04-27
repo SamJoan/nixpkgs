@@ -301,6 +301,20 @@ stdenv.mkDerivation (
 
         set -x
 
+        ls $bazelOut/external
+
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+        echo "I'm Leaving..."
+
         copts=()
         host_copts=()
         linkopts=()

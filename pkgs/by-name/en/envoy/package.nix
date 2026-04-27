@@ -297,6 +297,9 @@ buildBazelPackage rec {
     "--java_runtime_version=local_jdk"
     "--tool_java_runtime_version=local_jdk"
 
+    # TODO: FLAG FLAG
+    "--extra_toolchains=//bazel:boringssl"
+
     # Force use of system Rust.
     "--extra_toolchains=//bazel/nix:rust_nix_aarch64,//bazel/nix:rust_nix_x86_64"
 
