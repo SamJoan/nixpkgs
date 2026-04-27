@@ -63,6 +63,7 @@ buildBazelPackage rec {
   inherit (srcVer) version;
   bazel = bazel_7;
 
+  # TODO: is this helping
   fetchConfigured = false;
 
   src = applyPatches {
@@ -283,13 +284,13 @@ buildBazelPackage rec {
   ];
   bazelBuildFlags = [
     "-c opt"
-    # "--spawn_strategy=standalone"
-    # "--noexperimental_strict_action_env"
-    # "--cxxopt=-Wno-error"
-    # "--linkopt=-Wl,-z,noexecstack"
-    # "--config=gcc"
-    # "--verbose_failures"
-    # "--incompatible_enable_cc_toolchain_resolution=true"
+    "--spawn_strategy=standalone"
+    "--noexperimental_strict_action_env"
+    "--cxxopt=-Wno-error"
+    "--linkopt=-Wl,-z,noexecstack"
+    "--config=gcc"
+    "--verbose_failures"
+    "--incompatible_enable_cc_toolchain_resolution=true"
 
     # Force use of system Java.
     "--extra_toolchains=@local_jdk//:all"
@@ -305,7 +306,7 @@ buildBazelPackage rec {
     # The missing symbols would be instantiations of a template class from https://github.com/grpc/grpc/blob/v1.59.4/src/core/lib/transport/metadata_batch.h
     # "ParseMemento" and "MementoToValue" are only implemented for some types
     # and appear unused and unimplemented for the undefined cases reported by the linker.
-    # "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
+    "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
 
     "--define=wasm=${wasmRuntime}"
 
