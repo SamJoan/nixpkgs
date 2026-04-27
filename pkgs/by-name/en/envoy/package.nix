@@ -38,8 +38,8 @@ let
     # However, the version string is more useful for end-users.
     # These are contained in a attrset of their own to make it obvious that
     # people should update both.
-    version = "1.36.5";
-    rev = "41749943780b54b70b510b1b1a4805ae529e174a";
+    version = "v1.38.0";
+    rev = "f1dd21b16c244bda00edfb5ffce577e12d0d2ec2";
     hash = "sha256-dT6ehfmW/huuyitqIlYAlEzUE6WrVA39sDKxatkZGaY=";
   };
 
