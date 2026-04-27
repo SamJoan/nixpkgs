@@ -64,7 +64,7 @@ buildBazelPackage rec {
   bazel = bazel_7;
 
   # TODO: is this helping
-  fetchConfigured = "BANANA";
+  fetchConfigured = true;
 
   src = applyPatches {
     src = fetchFromGitHub {
