@@ -40,7 +40,7 @@ let
     # people should update both.
     version = "v1.38.0";
     rev = "f1dd21b16c244bda00edfb5ffce577e12d0d2ec2";
-    hash = lib.fakeHash;
+    hash = "sha256-wnhqZ0n9tdgzUluiwRxFTjOSKG2wtLbRmpx/N2kIJVU";
   };
 
   # these need to be updated for any changes to fetchAttrs
