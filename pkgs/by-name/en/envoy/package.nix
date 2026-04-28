@@ -273,7 +273,8 @@ buildBazelPackage rec {
 
   removeRulesCC = false;
   removeLocalConfigCc = false;
-  removeLocal = false;
+  rremoveLocalConfigSh = false;
+  emoveLocal = false;
   bazelTargets = [ "//source/exe:envoy-static" ];
   bazelFlags = [
     "--repo_env=BAZEL_HTTP_RULES_URLS_AS_DEFAULT_CANONICAL_ID=0"
