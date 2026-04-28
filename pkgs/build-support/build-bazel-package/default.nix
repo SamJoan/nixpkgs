@@ -321,17 +321,24 @@ stdenv.mkDerivation (
           done
         fi
 
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
-        ${bazelCmd} info output_base
+        ${bazelCmd {
+          cmd = "info output_base";
+          }}
+        ${bazelCmd {
+          cmd = "info output_base";
+          }}
+        ${bazelCmd {
+          cmd = "info output_base";
+          }}
+        ${bazelCmd {
+          cmd = "info output_base";
+          }}
+        ${bazelCmd {
+          cmd = "info output_base";
+          }}
+        ${bazelCmd {
+          cmd = "info";
+          }}
 
         ${bazelCmd {
           cmd = "test";
