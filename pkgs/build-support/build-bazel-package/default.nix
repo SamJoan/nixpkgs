@@ -321,24 +321,39 @@ stdenv.mkDerivation (
           done
         fi
 
-        ${bazelCmd {
-          cmd = "info output_base";
-          }}
-        ${bazelCmd {
-          cmd = "info output_base";
-          }}
-        ${bazelCmd {
-          cmd = "info output_base";
-          }}
-        ${bazelCmd {
-          cmd = "info output_base";
-          }}
-        ${bazelCmd {
-          cmd = "info output_base";
-          }}
-        ${bazelCmd {
-          cmd = "info";
-          }}
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
+        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
+                             USER=homeless-shelter \
+                             bazel info output_base
 
         ${bazelCmd {
           cmd = "test";
