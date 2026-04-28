@@ -40,7 +40,7 @@ let
     # people should update both.
     version = "v1.38.0";
     rev = "f1dd21b16c244bda00edfb5ffce577e12d0d2ec2";
-    hash = "sha256-dT6ehfmW/huuyitqIlYAlEzUE6WrVA39sDKxatkZGaY=";
+    hash = "sha256-00000000000000000000000000000000000000000000";
   };
 
   # these need to be updated for any changes to fetchAttrs
@@ -49,8 +49,8 @@ let
       depsHash
     else
       {
-        x86_64-linux = "sha256-dQpkB4jRfJOB14AO5ynoL3VObI1af7nTI3vbMr5N6/g=";
-        aarch64-linux = "sha256-59sY+bpGsKMDthcj+jw00WhN+vsP5MOTXy0m8HJxebM=";
+        x86_64-linux = "sha256-00000000000000000000000000000000000000000000";
+        aarch64-linux = "sha256-00000000000000000000000000000000000000000000";
       }
       .${stdenv.system} or (throw "unsupported system ${stdenv.system}");
 
