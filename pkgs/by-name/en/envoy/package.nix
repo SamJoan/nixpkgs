@@ -272,7 +272,7 @@ buildBazelPackage rec {
   };
 
   removeRulesCC = false;
-  removeLocalConfigCc = true;
+  removeLocalConfigCc = false;
   removeLocal = false;
   bazelTargets = [ "//source/exe:envoy-static" ];
   bazelFlags = [
