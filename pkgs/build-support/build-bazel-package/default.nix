@@ -321,6 +321,18 @@ stdenv.mkDerivation (
           done
         fi
 
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+        ${bazelCmd} info output_base
+
         ${bazelCmd {
           cmd = "test";
           additionalFlags = [
