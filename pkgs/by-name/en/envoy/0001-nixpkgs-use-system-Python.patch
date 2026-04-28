@@ -58,9 +58,6 @@ index fbc508127dc191d65a9d7fc40fd0622bdca93ca9..dd7282bf6d6dc05f5676baf53fb74619
  load("@toolchains_llvm//toolchain:deps.bzl", "bazel_toolchain_dependencies")
  load("//bazel/external/cargo:crates.bzl", "raze_fetch_remote_crates")
 
--def _python_minor_version(python_version):
--    return "_".join(python_version.split(".")[:-1])
--
  GLIBC_VERSION = "2.31"
 
  # Python version for `rules_python`
