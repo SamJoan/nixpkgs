@@ -323,37 +323,38 @@ stdenv.mkDerivation (
 
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
+
         BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
                              USER=homeless-shelter \
-                             bazel info output_base
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             bazel info output_base
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             bazel info output_base
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             bazel info output_base
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             bazel info output_base
+                             ls $(bazel info output_base)
+        echo "------------"
 
         ${bazelCmd {
           cmd = "test";
