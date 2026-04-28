@@ -107,7 +107,6 @@ buildBazelPackage rec {
     # patch rules_rust for envoy specifics
     cp ${./rules_rust.patch} bazel/rules_rust.patch
     substituteInPlace bazel/repositories.bzl \
-    # --replace-fail ', "@envoy//bazel:rules_rust_ppc64le.patch"' "" \
       --replace-fail '"@envoy//bazel:emsdk.patch"' ""
 
     substitute ${./rules_rust_extra.patch} bazel/nix/rules_rust_extra.patch \
