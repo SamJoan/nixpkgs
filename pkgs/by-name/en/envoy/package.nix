@@ -78,7 +78,8 @@ buildBazelPackage rec {
       ./0003-nixpkgs-use-system-C-C-toolchains.patch
 
       # bump rules_rust to support newer Rust
-      ./0004-nixpkgs-bump-rules_rust-to-0.60.0.patch
+      # Latest version of envoy has 0.69.x already
+      #./0004-nixpkgs-bump-rules_rust-to-0.60.0.patch
     ];
     postPatch = ''
       chmod -R +w .
