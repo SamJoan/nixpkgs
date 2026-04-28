@@ -277,6 +277,7 @@ buildBazelPackage rec {
   bazelTargets = [ "//source/exe:envoy-static" ];
   bazelFlags = [
     "--repo_env=BAZEL_HTTP_RULES_URLS_AS_DEFAULT_CANONICAL_ID=0"
+    "--config=boringssl-fips"
   ];
   bazelBuildFlags = [
     "-c opt"
@@ -305,6 +306,7 @@ buildBazelPackage rec {
     "--linkopt=-Wl,--unresolved-symbols=ignore-in-object-files"
 
     "--define=wasm=${wasmRuntime}"
+    "--config=boringssl-fips"
   ]
   ++ (lib.optionals stdenv.hostPlatform.isAarch64 [
     # external/com_github_google_tcmalloc/tcmalloc/internal/percpu_tcmalloc.h:611:9: error: expected ':' or '::' before '[' token
@@ -322,6 +324,7 @@ buildBazelPackage rec {
     # https://github.com/bazelbuild/rules_go/issues/3844
     "--repo_env=GOPROXY=https://proxy.golang.org,direct"
     "--repo_env=GOSUMDB=sum.golang.org"
+    "--config=boringssl-fips"
   ];
 
   requiredSystemFeatures = [ "big-parallel" ];
