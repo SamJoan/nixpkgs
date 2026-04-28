@@ -40,7 +40,7 @@ let
     # people should update both.
     version = "v1.38.0";
     rev = "f1dd21b16c244bda00edfb5ffce577e12d0d2ec2";
-    hash = "sha256-00000000000000000000000000000000000000000000";
+    hash = lib.fakeHash;
   };
 
   # these need to be updated for any changes to fetchAttrs
@@ -49,8 +49,8 @@ let
       depsHash
     else
       {
-        x86_64-linux = "sha256-00000000000000000000000000000000000000000000";
-        aarch64-linux = "sha256-00000000000000000000000000000000000000000000";
+        x86_64-linux = lib.fakeHash;
+        aarch64-linux = lib.fakeHash;
       }
       .${stdenv.system} or (throw "unsupported system ${stdenv.system}");
 
