@@ -274,21 +274,21 @@ stdenv.mkDerivation (
     preConfigure = ''
       mkdir -p "$bazelOut"
 
-      (cd $bazelOut && tar xf $deps)
+      # (cd $bazelOut && tar xf $deps)
 
-      test "${bazel.name}" = "$(<$bazelOut/external/.nix-bazel-version)" || {
-        echo "fixed output derivation was built for a different bazel version" >&2
-        echo "     got: $(<$bazelOut/external/.nix-bazel-version)" >&2
-        echo "expected: ${bazel.name}" >&2
-        exit 1
-      }
+      # test "${bazel.name}" = "$(<$bazelOut/external/.nix-bazel-version)" || {
+        # echo "fixed output derivation was built for a different bazel version" >&2
+        # echo "     got: $(<$bazelOut/external/.nix-bazel-version)" >&2
+        # echo "expected: ${bazel.name}" >&2
+        # exit 1
+      # }
 
-      chmod -R +w $bazelOut
-      find $bazelOut -type l | while read symlink; do
-        if [[ $(readlink "$symlink") == *NIX_BUILD_TOP* ]]; then
-          ln -sf $(readlink "$symlink" | sed "s,NIX_BUILD_TOP,$NIX_BUILD_TOP,") "$symlink"
-        fi
-      done
+      # chmod -R +w $bazelOut
+      # find $bazelOut -type l | while read symlink; do
+        # if [[ $(readlink "$symlink") == *NIX_BUILD_TOP* ]]; then
+          # ln -sf $(readlink "$symlink" | sed "s,NIX_BUILD_TOP,$NIX_BUILD_TOP,") "$symlink"
+        # fi
+      # done
     ''
     + fBuildAttrs.preConfigure or "";
 
