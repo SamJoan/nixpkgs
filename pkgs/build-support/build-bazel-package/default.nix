@@ -254,6 +254,7 @@ stdenv.mkDerivation (
           {
             # With __structuredAttrs = true, the build always fails with “output $out is not allowed to refer to the following paths: $out”.
             # This appears to be the same issue as in 283bca9648fc1afb01d3e4c3b5919251429da907.
+            unsafeDiscardReferences.out = true;
             outputChecks.out.allowedRequisites = [ "out" ];
           }
         else
