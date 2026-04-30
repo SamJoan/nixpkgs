@@ -135,131 +135,131 @@ stdenv.mkDerivation (
   fBuildAttrs
   // {
 
-    deps = stdenv.mkDerivation (
-      fFetchAttrs
-      // {
-        name = "${name}-deps.tar";
+    # deps = stdenv.mkDerivation (
+      # fFetchAttrs
+      # // {
+        # name = "${name}-deps.tar";
 
-        impureEnvVars = lib.fetchers.proxyImpureEnvVars ++ fFetchAttrs.impureEnvVars or [ ];
+        # impureEnvVars = lib.fetchers.proxyImpureEnvVars ++ fFetchAttrs.impureEnvVars or [ ];
 
-        nativeBuildInputs = fFetchAttrs.nativeBuildInputs or [ ] ++ [ bazel ];
+        # nativeBuildInputs = fFetchAttrs.nativeBuildInputs or [ ] ++ [ bazel ];
 
-        preHook = fFetchAttrs.preHook or "" + ''
-          export bazelOut="$(echo ''${NIX_BUILD_TOP}/output | sed -e 's,//,/,g')"
-          export bazelUserRoot="$(echo ''${NIX_BUILD_TOP}/tmp | sed -e 's,//,/,g')"
-          export HOME="$NIX_BUILD_TOP"
-          export USER="nix"
-          # This is needed for git_repository with https remotes
-          export GIT_SSL_CAINFO="${cacert}/etc/ssl/certs/ca-bundle.crt"
-          # This is needed for Bazel fetchers that are themselves programs (e.g.
-          # rules_go using the go toolchain)
-          export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
-        '';
+        # preHook = fFetchAttrs.preHook or "" + ''
+          # export bazelOut="$(echo ''${NIX_BUILD_TOP}/output | sed -e 's,//,/,g')"
+          # export bazelUserRoot="$(echo ''${NIX_BUILD_TOP}/tmp | sed -e 's,//,/,g')"
+          # export HOME="$NIX_BUILD_TOP"
+          # export USER="nix"
+          # # This is needed for git_repository with https remotes
+          # export GIT_SSL_CAINFO="${cacert}/etc/ssl/certs/ca-bundle.crt"
+          # # This is needed for Bazel fetchers that are themselves programs (e.g.
+          # # rules_go using the go toolchain)
+          # export SSL_CERT_FILE="${cacert}/etc/ssl/certs/ca-bundle.crt"
+        # '';
 
-        buildPhase =
-          fFetchAttrs.buildPhase or ''
-            runHook preBuild
+        # buildPhase =
+          # fFetchAttrs.buildPhase or ''
+            # runHook preBuild
 
-            ${bazelCmd {
-              cmd = if fetchConfigured then "build --nobuild" else "fetch";
-              additionalFlags = [
-                # We disable multithreading for the fetching phase since it can lead to timeouts with many dependencies/threads:
-                # https://github.com/bazelbuild/bazel/issues/6502
-                "--loading_phase_threads=1"
-                "$bazelFetchFlags"
-              ]
-              ++ (
-                if fetchConfigured then
-                  [
-                    "--jobs"
-                    "$NIX_BUILD_CORES"
-                  ]
-                else
-                  [ ]
-              );
-              targets = fFetchAttrs.bazelTargets ++ fFetchAttrs.bazelTestTargets;
-            }}
+            # ${bazelCmd {
+              # cmd = if fetchConfigured then "build --nobuild" else "fetch";
+              # additionalFlags = [
+                # # We disable multithreading for the fetching phase since it can lead to timeouts with many dependencies/threads:
+                # # https://github.com/bazelbuild/bazel/issues/6502
+                # "--loading_phase_threads=1"
+                # "$bazelFetchFlags"
+              # ]
+              # ++ (
+                # if fetchConfigured then
+                  # [
+                    # "--jobs"
+                    # "$NIX_BUILD_CORES"
+                  # ]
+                # else
+                  # [ ]
+              # );
+              # targets = fFetchAttrs.bazelTargets ++ fFetchAttrs.bazelTestTargets;
+            # }}
 
-            runHook postBuild
-          '';
+            # runHook postBuild
+          # '';
 
-        installPhase =
-          fFetchAttrs.installPhase or (
-            ''
-              runHook preInstall
+        # installPhase =
+          # fFetchAttrs.installPhase or (
+            # ''
+              # runHook preInstall
 
-              # Remove all built in external workspaces, Bazel will recreate them when building
-              rm -rf $bazelOut/external/{bazel_tools,\@bazel_tools.marker}
-              ${lib.optionalString removeRulesCC "rm -rf $bazelOut/external/{rules_cc,\\@rules_cc.marker}"}
+              # # Remove all built in external workspaces, Bazel will recreate them when building
+              # rm -rf $bazelOut/external/{bazel_tools,\@bazel_tools.marker}
+              # ${lib.optionalString removeRulesCC "rm -rf $bazelOut/external/{rules_cc,\\@rules_cc.marker}"}
 
-              rm -rf $bazelOut/external/{embedded_jdk,\@embedded_jdk.marker}
-              ${lib.optionalString removeLocalConfigCc "rm -rf $bazelOut/external/{local_config_cc,\\@local_config_cc.marker}"}
-              ${lib.optionalString removeLocal "rm -rf $bazelOut/external/{local_*,\\@local_*.marker}"}
+              # rm -rf $bazelOut/external/{embedded_jdk,\@embedded_jdk.marker}
+              # ${lib.optionalString removeLocalConfigCc "rm -rf $bazelOut/external/{local_config_cc,\\@local_config_cc.marker}"}
+              # ${lib.optionalString removeLocal "rm -rf $bazelOut/external/{local_*,\\@local_*.marker}"}
 
-              # For bazel version >= 6 with bzlmod.
-              ${lib.optionalString removeLocalConfigCc "rm -rf $bazelOut/external/*[~+]{local_config_cc,local_config_cc.marker}"}
-              ${lib.optionalString removeLocalConfigSh "rm -rf $bazelOut/external/*[~+]{local_config_sh,local_config_sh.marker}"}
-              ${lib.optionalString removeLocal "rm -rf $bazelOut/external/*[~+]{local_jdk,local_jdk.marker}"}
+              # # For bazel version >= 6 with bzlmod.
+              # ${lib.optionalString removeLocalConfigCc "rm -rf $bazelOut/external/*[~+]{local_config_cc,local_config_cc.marker}"}
+              # ${lib.optionalString removeLocalConfigSh "rm -rf $bazelOut/external/*[~+]{local_config_sh,local_config_sh.marker}"}
+              # ${lib.optionalString removeLocal "rm -rf $bazelOut/external/*[~+]{local_jdk,local_jdk.marker}"}
 
-              # Clear markers
-              find $bazelOut/external -name '@*\.marker' -exec sh -c 'echo > {}' \;
+              # # Clear markers
+              # find $bazelOut/external -name '@*\.marker' -exec sh -c 'echo > {}' \;
 
-              # Remove all vcs files
-              rm -rf $(find $bazelOut/external -type d -name .git)
-              rm -rf $(find $bazelOut/external -type d -name .svn)
-              rm -rf $(find $bazelOut/external -type d -name .hg)
+              # # Remove all vcs files
+              # rm -rf $(find $bazelOut/external -type d -name .git)
+              # rm -rf $(find $bazelOut/external -type d -name .svn)
+              # rm -rf $(find $bazelOut/external -type d -name .hg)
 
-              # Removing top-level symlinks along with their markers.
-              # This is needed because they sometimes point to temporary paths (?).
-              # For example, in Tensorflow-gpu build:
-              # platforms -> NIX_BUILD_TOP/tmp/install/35282f5123611afa742331368e9ae529/_embedded_binaries/platforms
-              find $bazelOut/external -maxdepth 1 -type l | while read symlink; do
-                name="$(basename "$symlink")"
-                rm "$symlink"
-                test -f "$bazelOut/external/@$name.marker" && rm "$bazelOut/external/@$name.marker" || true
-              done
+              # # Removing top-level symlinks along with their markers.
+              # # This is needed because they sometimes point to temporary paths (?).
+              # # For example, in Tensorflow-gpu build:
+              # # platforms -> NIX_BUILD_TOP/tmp/install/35282f5123611afa742331368e9ae529/_embedded_binaries/platforms
+              # find $bazelOut/external -maxdepth 1 -type l | while read symlink; do
+                # name="$(basename "$symlink")"
+                # rm "$symlink"
+                # test -f "$bazelOut/external/@$name.marker" && rm "$bazelOut/external/@$name.marker" || true
+              # done
 
-              # Patching symlinks to remove build directory reference
-              find $bazelOut/external -type l | while read symlink; do
-                new_target="$(readlink "$symlink" | sed "s,$NIX_BUILD_TOP,NIX_BUILD_TOP,")"
-                rm "$symlink"
-                ln -sf "$new_target" "$symlink"
-            ''
-            + lib.optionalString stdenv.hostPlatform.isDarwin ''
-              # on linux symlink permissions cannot be modified, so we modify those on darwin to match the linux ones
-              ${chmodder}/bin/chmodder "$symlink"
-            ''
-            + ''
-              done
+              # # Patching symlinks to remove build directory reference
+              # find $bazelOut/external -type l | while read symlink; do
+                # new_target="$(readlink "$symlink" | sed "s,$NIX_BUILD_TOP,NIX_BUILD_TOP,")"
+                # rm "$symlink"
+                # ln -sf "$new_target" "$symlink"
+            # ''
+            # + lib.optionalString stdenv.hostPlatform.isDarwin ''
+              # # on linux symlink permissions cannot be modified, so we modify those on darwin to match the linux ones
+              # ${chmodder}/bin/chmodder "$symlink"
+            # ''
+            # + ''
+              # done
 
-              echo '${bazel.name}' > $bazelOut/external/.nix-bazel-version
+              # echo '${bazel.name}' > $bazelOut/external/.nix-bazel-version
 
-              (cd $bazelOut/ && tar cf $out --sort=name --mtime='@1' --owner=0 --group=0 --numeric-owner external/)
+              # (cd $bazelOut/ && tar cf $out --sort=name --mtime='@1' --owner=0 --group=0 --numeric-owner external/)
 
-              runHook postInstall
-            ''
-          );
+              # runHook postInstall
+            # ''
+          # );
 
-        dontFixup = true;
+        # dontFixup = true;
 
-        inherit (lib.fetchers.normalizeHash { hashTypes = [ "sha256" ]; } fetchAttrs)
-          outputHash
-          outputHashAlgo
-          ;
-      }
-      // (
-        if fFetchAttrs.__structuredAttrs or false then
-          {
-            # With __structuredAttrs = true, the build always fails with “output $out is not allowed to refer to the following paths: $out”.
-            # This appears to be the same issue as in 283bca9648fc1afb01d3e4c3b5919251429da907.
-            outputChecks.out.allowedRequisites = [ "out" ];
-          }
-        else
-          {
-            allowedRequisites = [ ];
-          }
-      )
-    );
+        # inherit (lib.fetchers.normalizeHash { hashTypes = [ "sha256" ]; } fetchAttrs)
+          # outputHash
+          # outputHashAlgo
+          # ;
+      # }
+      # // (
+        # if fFetchAttrs.__structuredAttrs or false then
+          # {
+            # # With __structuredAttrs = true, the build always fails with “output $out is not allowed to refer to the following paths: $out”.
+            # # This appears to be the same issue as in 283bca9648fc1afb01d3e4c3b5919251429da907.
+            # outputChecks.out.allowedRequisites = [ "out" ];
+          # }
+        # else
+          # {
+            # allowedRequisites = [ ];
+          # }
+      # )
+    # );
 
     nativeBuildInputs = fBuildAttrs.nativeBuildInputs or [ ] ++ [
       (bazel.override { enableNixHacks = true; })
@@ -274,7 +274,6 @@ stdenv.mkDerivation (
     preConfigure = ''
       mkdir -p "$bazelOut"
 
-      # (cd $bazelOut && tar xf $deps)
 
       # test "${bazel.name}" = "$(<$bazelOut/external/.nix-bazel-version)" || {
         # echo "fixed output derivation was built for a different bazel version" >&2
