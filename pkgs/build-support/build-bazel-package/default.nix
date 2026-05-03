@@ -160,8 +160,6 @@ stdenv.mkDerivation (
           fFetchAttrs.buildPhase or ''
             runHook preBuild
 
-            set -x
-
             ${bazelCmd {
               cmd = if fetchConfigured then "build --nobuild" else "fetch";
               additionalFlags = [
@@ -323,41 +321,6 @@ stdenv.mkDerivation (
             host_linkopts+=( "--host_linkopt=-Wl,$flag" )
           done
         fi
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
-
-        BAZEL_USE_CPP_ONLY_TOOLCHAIN=1 \
-                             USER=homeless-shelter \
-                             ls $(bazel info output_base)
-        echo "------------"
 
         ${bazelCmd {
           cmd = "test";
